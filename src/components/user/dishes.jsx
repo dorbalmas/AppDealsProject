@@ -79,45 +79,60 @@ class Dishes extends Component {
   };
   sendForm = async () => {
     // event.preventDefault();
+    if (
+      this.name.current.value == "" ||
+      this.priceBeforeDiscount.current.value == "" ||
+      this.discount.current.value == "" ||
+      this.priceAfterDiscount.current.value == "" ||
+      this.category.current.value == "" ||
+      this.hoursOfDeal.current.value == "" ||
+      this.description.current.value == ""
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please fill all the blanks!!",
+      });
+    } else {
+      const newObj = {
+        name: this.name.current.value,
+        priceBeforeDiscount: this.priceBeforeDiscount.current.value,
+        discount: this.discount.current.value,
+        priceAfterDiscount: this.priceAfterDiscount.current.value,
+        category: this.category.current.value,
+        hoursOfDeal: this.hoursOfDeal.current.value,
+        description: this.description.current.value,
+      };
 
-    const newObj = {
-      name: this.name.current.value,
-      priceBeforeDiscount: this.priceBeforeDiscount.current.value,
-      discount: this.discount.current.value,
-      priceAfterDiscount: this.priceAfterDiscount.current.value,
-      category: this.category.current.value,
-      hoursOfDeal: this.hoursOfDeal.current.value,
-      description: this.description.current.value,
-    };
-
-    console.log(newObj);
-    console.log(this.props.userId);
-    await doApiPost(
-      ` https://dealsproject.herokuapp.com/user/addDish/${this.props.userId}`,
-      newObj
-    ).then((data) => {
-      if (data) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Your new deal has been saved",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        if (this.props.history) {
-          this.props.history.push("/user/DealList");
+      console.log(newObj);
+      console.log(this.props.userId);
+      await doApiPost(
+        ` https://dealsproject.herokuapp.com/user/addDish/${this.props.userId}`,
+        newObj
+      ).then((data) => {
+        if (data) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your new deal has been saved",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          if (this.props.history) {
+            this.props.history.push("/user/DealList");
+          } else {
+            window.location.href = "/user/DealList";
+          }
         } else {
-          window.location.href = "/user/DealList";
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Server Issue, Try again Later",
+            footer: "<a href>Why do I have this issue?</a>",
+          });
         }
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Server Issue, Try again Later",
-          footer: "<a href>Why do I have this issue?</a>",
-        });
-      }
-    });
+      });
+    }
   };
   //   handledishUpdate = async () => {
   //     const prof = {

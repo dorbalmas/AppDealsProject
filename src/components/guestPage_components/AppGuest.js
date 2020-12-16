@@ -107,7 +107,14 @@ const AppGuest = (props) => {
         </div>
         <hr />
         {/* **********************Kosher******************** */}
-
+        <button
+          className="btn btn-outline-info"
+          onClick={() => {
+            window.location.href = "/user/";
+          }}
+        >
+          Reset Filter
+        </button>
         <button className="btn btn-toolbar" autoFocus>
           <ToggleButtonGroup
             autoFocus
@@ -259,7 +266,7 @@ const AppGuest = (props) => {
       <div className="col-lg-9 card p-0 m-0 ">
         {loading ? (
           <div className="d-flex justify-content-center align-items-center">
-            <div style={{ height: "400px" }}></div>
+            <div style={{ minheight: "400px" }}></div>
             <ReactbootStrap.Spinner
               animation="border"
               style={{

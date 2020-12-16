@@ -35,6 +35,17 @@ class SingleProductCart extends Component {
         className="d-flex flex-column align-items-center p-2 border border-dark border-darken-2 m-1"
         style={{ backgroundColor: this.randonColor }}
       >
+        <button
+          onClick={() => {
+            this.props.item.amount = 0;
+            this.props.updateCart(this.props.item);
+          }}
+          type="button"
+          className="btn btn-outline-danger form-control w-75 "
+          aria-label="Close"
+        >
+          <b>Delete</b>
+        </button>
         {/* <img className="img-thumbnail" src={this.props.item.image} alt="" /> */}
         <p
           className="img-thumbnail form-control text-white"
@@ -61,7 +72,7 @@ class SingleProductCart extends Component {
           onClick={this.handleClick}
           className="btn btn-sm btn-outline-success form-control w-75 border border-1 m-2"
         >
-          Update Amount
+          <b>Update Amount</b>
         </button>
       </div>
     );

@@ -33,7 +33,10 @@ const AdminTableSearch = (props) => {
       if (data.message == "deleted")
         apiGet("https://dealsproject.herokuapp.com/user/allUsers").then(
           (data) => {
-            setArr_list(data);
+            let onlyResturants = data.filter(
+              (item) => item.typeUser == "Resturant"
+            );
+            setArr_list(onlyResturants);
           }
         );
     });

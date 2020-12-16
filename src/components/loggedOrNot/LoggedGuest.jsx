@@ -11,7 +11,7 @@ class LoggedGuestPanel extends Component {
   render() {
     return (
       <div className="row justify-content-center align-items-center fixed-top ">
-        <nav className="navbar navbar-light bg-dark form-control h-25">
+        <nav className="navbar navbar-dark bg-dark form-control h-25">
           <Popup
             content="Home Page!"
             trigger={
@@ -23,7 +23,7 @@ class LoggedGuestPanel extends Component {
                   textShadow: "#474747 3px 5px 2px",
                 }}
               >
-                AppDeal
+                DailyDeals
               </Link>
             }
           />
@@ -51,40 +51,6 @@ class LoggedGuestPanel extends Component {
                 {this.props.cartSize}
               </span>
             </Link>
-
-            {/* <!--הוספתי קצת מוזיקה לנאב בר  --> */}
-            <div className="d-flex justify-content-center align-items-center text-info">
-              press me
-              <i className="fa fa-arrow-right px-1" aria-hidden="true"></i>
-              <Popup
-                content="Enjoy the music!"
-                trigger={
-                  <div
-                    style={{
-                      position: "relative",
-                      width: "50px",
-                      height: "34px",
-                      overflow: "hidden",
-                    }}
-                    className="rounded"
-                  >
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "-263px",
-                        left: "-10px",
-                      }}
-                    >
-                      <iframe
-                        width="300"
-                        height="300"
-                        src="https://www.youtube.com/embed/5qap5aO4i9A?playlist=dTbONq0zxRA&rel=0"
-                      ></iframe>
-                    </div>
-                  </div>
-                }
-              />
-            </div>
           </div>
 
           <Link

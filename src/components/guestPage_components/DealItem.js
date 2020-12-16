@@ -69,7 +69,7 @@ function DealItem(props) {
               style={{ backgroundColor: randonColor, borderRadius: "25px" }}
             >
               <h1 className=" px-1 display-4 ">{item.name}</h1>
-              <p className="px-1 bg-info text-white">{item.discount} OFF!</p>
+              <p className="px-1 bg-white text-info">{item.discount} OFF! </p>
               <p className="px-1">
                 <b>{item.category} deal:</b> {item.description}
               </p>
@@ -80,13 +80,17 @@ function DealItem(props) {
                 </b>
               </p>
               <p className="px-1">Deal time range: {item.hoursOfDeal}</p>
-              <input
-                className="form-control  mb-3  "
-                type="number"
-                ref={myAmountRefInput}
-                min={1}
-                defaultValue={1}
-              />{" "}
+              <div className="d-flex justify-content-center">
+                <input
+                  className="form-control text-gray w-25 mb-3  "
+                  type="number"
+                  ref={myAmountRefInput}
+                  min={1}
+                  defaultValue={1}
+                />{" "}
+              </div>
+              <p className="px-1 bg-info text-white">{item.discount} OFF!</p>
+
               <button
                 onClick={handleClick}
                 className="btn btn-outline-light mb-3 "

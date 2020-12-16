@@ -10,6 +10,16 @@ class NotLoggedPanel extends Component {
           <Link className="nav-link mx-2 text-danger" to="/user/signup">
             Sign Up
           </Link>
+          <Link
+            to="/"
+            className=" navbar-brand p-2 mr-4"
+            style={{
+              color: "rgb(199, 196, 196)",
+              textShadow: "#474747 3px 5px 2px",
+            }}
+          >
+            DailyDeals
+          </Link>
           <Link className="nav-link mx-2 text-success" to="/user/login">
             Log in
           </Link>

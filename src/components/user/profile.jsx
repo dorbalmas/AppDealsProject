@@ -104,30 +104,47 @@ class Profile extends Component {
     }
   };
   handleProfileUpdate = async () => {
-    const prof = {
-      resturantName: this.resturantName.current.value,
-      city: this.city.current.value,
-      street: this.street.current.value,
-      phoneNumber: this.phoneNumber.current.value,
-      openHour: this.openHour.current.value,
-      closeHour: this.closeHour.current.value,
-      kosherType: this.kosherType.current.value,
-      description: this.description.current.value,
-    };
-    let data = await userProfileUpdate(this.props.userId, prof);
-    if (data.updated) {
-      this.props.profileUpdate(data.body);
-      this.setState({
-        updated: this.state.updated + 1,
+    if (
+      this.resturantName.current.value == "" ||
+      this.city.current.value == "" ||
+      this.street.current.value == "" ||
+      this.phoneNumber.current.value == "" ||
+      this.openHour.current.value == "" ||
+      this.closeHour.current.value == "" ||
+      this.kosherType.current.value == "" ||
+      this.description.current.value == ""
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please fill all the blanks!!",
       });
-
-      if (this.props.history) {
-        this.props.history.push("/user/dish");
-      } else {
-        window.location.href = "/user/dish";
-      }
     } else {
-      alert("Server Issue, Try again Later");
+      const prof = {
+        resturantName: this.resturantName.current.value,
+        city: this.city.current.value,
+        street: this.street.current.value,
+        phoneNumber: this.phoneNumber.current.value,
+        openHour: this.openHour.current.value,
+        closeHour: this.closeHour.current.value,
+        kosherType: this.kosherType.current.value,
+        description: this.description.current.value,
+      };
+      let data = await userProfileUpdate(this.props.userId, prof);
+      if (data.updated) {
+        this.props.profileUpdate(data.body);
+        this.setState({
+          updated: this.state.updated + 1,
+        });
+
+        if (this.props.history) {
+          this.props.history.push("/user/dish");
+        } else {
+          window.location.href = "/user/dish";
+        }
+      } else {
+        alert("Server Issue, Try again Later");
+      }
     }
   };
 
@@ -168,7 +185,6 @@ class Profile extends Component {
               className="form-control "
               type="text"
               defaultValue={this.state.profile.resturantName}
-              placeHolder={this.state.profile.resturantName}
             />
           </div>
           <div className="form-group">
@@ -178,7 +194,6 @@ class Profile extends Component {
                 custom
                 ref={this.kosherType}
                 defaultValue={this.state.profile.kosherType}
-                placeHolder={this.state.profile.kosherType}
               >
                 <option selected hidden>
                   Is your restaurant kosher or not kosher?
@@ -192,7 +207,6 @@ class Profile extends Component {
               custom
               ref={this.city}
               defaultValue={this.state.profile.city}
-              placeHolder={this.state.profile.city}
             >
               <option selected hidden>
                 Choose city..
@@ -210,7 +224,6 @@ class Profile extends Component {
               className="form-control "
               type="text"
               defaultValue={this.state.profile.street}
-              placeHolder={this.state.profile.street}
             />
           </div>
           <div className="form-group">
@@ -219,7 +232,6 @@ class Profile extends Component {
               className="form-control "
               type="text"
               defaultValue={this.state.profile.phoneNumber}
-              placeHolder={this.state.profile.phoneNumber}
             />
           </div>
 
@@ -229,7 +241,6 @@ class Profile extends Component {
               custom
               ref={this.openHour}
               defaultValue={this.state.profile.openHour}
-              placeHolder={this.state.profile.openHour}
             >
               <option selected hidden>
                 Open hour..
@@ -246,7 +257,6 @@ class Profile extends Component {
               custom
               ref={this.closeHour}
               defaultValue={this.state.profile.closeHour}
-              placeHolder={this.state.profile.closeHour}
             >
               <option selected hidden>
                 Close hour..
@@ -265,7 +275,6 @@ class Profile extends Component {
               type="text"
               rows="4"
               form="usrform"
-              placeholder="Resturant info.."
               defaultValue={this.state.profile.description}
             />
           </div>

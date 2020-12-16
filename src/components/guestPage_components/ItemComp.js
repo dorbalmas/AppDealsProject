@@ -48,7 +48,7 @@ function ItemComp(props) {
       <img
         src={item.profile.image}
         className="col-lg-6  my-3 rounded "
-        style={{ Height: "150px", width: "10px" }}
+        style={{ Height: "150px", width: "150px" }}
       />
 
       <div className="col-lg-6 mediaQ bg-light">
@@ -68,7 +68,7 @@ function ItemComp(props) {
         <p className="px-1">
           {item.profile.openHour} - {item.profile.closeHour}
         </p>
-        <textarea className="form-control-lg w-50" type="text">
+        <textarea className="form-control w-100" type="text" rows="4">
           {item.profile.description}
         </textarea>
       </div>
