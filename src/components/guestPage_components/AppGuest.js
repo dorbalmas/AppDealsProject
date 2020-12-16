@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import List from "./List";
 import { apiGet } from "../../services/ApiServ";
 import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
@@ -8,6 +8,9 @@ const AppGuest = (props) => {
   let [categoryValue, setCategotyValue] = useState("");
   let [cityValue, setCityValue] = useState("");
   let [hourDealValue, setHourDealValue] = useState("");
+  let priceRefInput = useRef("");
+  let [price, setPrice] = useState("");
+  console.log(priceRefInput.current.value);
   let arrayKosher = ["Kosher", "Show all", "Not kosher"];
   let arrayCategories = ["Pasta", "Pizza", "Burger", "Sushi", "Salad", "Steak"];
   let arrayCities = [
@@ -105,8 +108,9 @@ const AppGuest = (props) => {
         <hr />
         {/* **********************Kosher******************** */}
 
-        <button className="btn btn-toolbar">
+        <button className="btn btn-toolbar" autoFocus>
           <ToggleButtonGroup
+            autoFocus
             value={KosherValue}
             onChange={handleKosherChange}
             type="radio"
@@ -233,11 +237,24 @@ const AppGuest = (props) => {
           </ToggleButtonGroup>
         </button>
         <hr />
-        {/* <div className="form-group">
-          <button className="btn btn-info form-control">
-            <i className="fas fa-search"></i>
-          </button>
-        </div> */}
+
+        <button className="btn btn-toolbar ">
+          <label htmlFor="customRange1">
+            Up to: {price}
+            <i className="fas fa-shekel-sign m-1 text-info"></i>
+          </label>
+          <input
+            onChange={() => {
+              setPrice(priceRefInput.current.value);
+            }}
+            type="range"
+            className="custom-range"
+            id="customRange1"
+            min="1"
+            max="200"
+            ref={priceRefInput}
+          />
+        </button>
       </form>
       <div className="col-lg-9 card p-0 m-0 ">
         {loading ? (
@@ -258,8 +275,9 @@ const AppGuest = (props) => {
             loading={loading}
             categoryValue={categoryValue}
             hourDealValue={hourDealValue}
+            price={price}
             addToCart={props.addToCart}
-            user={props.user}
+            userLogged={props.userLogged}
           />
         )}
       </div>

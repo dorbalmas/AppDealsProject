@@ -58,7 +58,7 @@ class App extends React.Component {
         this.setState({ type: data.body.typeUser }, () => {});
         if (data.logged)
           this.setState({ logged: true, userSession: data.body }, () => {});
-        console.log(this.state.userSession.profile);
+        console.log(this.state.logged);
       });
     }
   }
@@ -164,9 +164,7 @@ class App extends React.Component {
                   userId={
                     this.state.userSession ? this.state.userSession._id : null
                   }
-                  user={
-                    this.state.userSession ? this.state.userSession.user : null
-                  }
+                  userLogged={this.state.userSession ? this.state.logged : null}
                 />
               )}
             />

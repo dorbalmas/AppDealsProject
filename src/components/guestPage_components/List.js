@@ -8,7 +8,7 @@ function List(props) {
   return (
     <div className="container-fluid mt-3 ">
       <div className="container">
-        <div className="row align-items-center justify-content-center">
+        <div className=" align-items-center justify-content-center">
           {onlyResturants ? (
             !props.loading ? (
               onlyResturants.map((item) => {
@@ -18,8 +18,9 @@ function List(props) {
                     key={item._id}
                     hourDealValue={props.hourDealValue}
                     categoryValue={props.categoryValue}
+                    price={props.price}
                     addToCart={props.addToCart}
-                    user={props.user}
+                    userLogged={props.userLogged}
                   />
                 );
               })

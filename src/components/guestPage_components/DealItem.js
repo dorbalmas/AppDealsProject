@@ -21,7 +21,7 @@ function DealItem(props) {
   let randComment = comment[Math.floor(Math.random() * comment.length)];
 
   const handleClick = () => {
-    if (!props.user) {
+    if (!props.userLogged) {
       Swal.fire({
         icon: "error",
         title: "Oops...",

@@ -7,7 +7,7 @@ function ItemComp(props) {
   let item = props.item;
   let hourDealValue = props.hourDealValue;
   let categoryValue = props.categoryValue;
-  console.log(hourDealValue + categoryValue);
+  let price = props.price;
   let filtered = item.dishDeals.filter((item) => item);
 
   if (categoryValue != "")
@@ -15,6 +15,9 @@ function ItemComp(props) {
 
   if (hourDealValue != "")
     filtered = filtered.filter((item) => item.hoursOfDeal === hourDealValue);
+
+  if (price != "")
+    filtered = filtered.filter((item) => item.priceAfterDiscount <= price);
 
   //   let [arr, setArr] = useState([]);
   //   let [url, setUrl] = useState(null);
@@ -76,7 +79,7 @@ function ItemComp(props) {
               item={item}
               key={item._id}
               addToCart={props.addToCart}
-              user={props.user}
+              userLogged={props.userLogged}
             />
           );
         })}
