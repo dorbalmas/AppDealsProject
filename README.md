@@ -1,3 +1,3 @@
 # Fullstack Supermaket React JS Frontend
 
-Projet URL: https://speedtechstore1.netlify.app/ <br/>
+Projet URL: https://bit.ly/3h5dqbj <br/>
