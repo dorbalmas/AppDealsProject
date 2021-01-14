@@ -59,7 +59,8 @@ class SingleProductCart extends Component {
           <b>{this.props.item.name}</b>
         </p>
         <p>
-          Price: {this.props.item.priceAfterDiscount * this.props.item.amount}
+          Price: <i className="fas fa-dollar-sign"></i>
+          {this.props.item.priceAfterDiscount * this.props.item.amount}
         </p>
         <input
           className="form-control w-75"

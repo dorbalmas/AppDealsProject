@@ -21,12 +21,12 @@ function DealItem(props) {
   let randComment = comment[Math.floor(Math.random() * comment.length)];
 
   const handleClick = () => {
-    if (!props.userLogged) {
+    if (!props.userLogged || props.user.typeUser === "Resturant") {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Please Sign Up in order to add deals!!!",
-        confirmButtonText: "SignUp page",
+        text: "Please Sign Up as a GUEST in order to add deals!!!",
+        confirmButtonText: "SignUp",
       }).then((result) => {
         if (result.isConfirmed) {
           history.push("/user/signup");
@@ -43,7 +43,7 @@ function DealItem(props) {
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: `deal **${item.name}** added successfully to your CART!`,
+        title: `Deal ${item.name} added successfully to your CART!`,
         showConfirmButton: false,
         timer: 2000,
       });
@@ -74,9 +74,11 @@ function DealItem(props) {
                 <b>{item.category} deal:</b> {item.description}
               </p>
               <p className="px-1">
-                Deal price: <del>{item.priceBeforeDiscount}</del>{" "}
+                Deal price: <i className="fas fa-dollar-sign"></i>
+                <del>{item.priceBeforeDiscount}</del>{" "}
                 <b>
-                  !!! <ins>{item.priceAfterDiscount}</ins> !!!
+                  !!! <i className="fas fa-dollar-sign"></i>{" "}
+                  <ins>{item.priceAfterDiscount}</ins> !!!
                 </b>
               </p>
               <p className="px-1">Deal time range: {item.hoursOfDeal}</p>

@@ -36,6 +36,39 @@ class LoggedResturantPanel extends Component {
             <Link className="nav-link mx-2 " to="/user/DealList">
               Deals List
             </Link>
+
+            {/* <!--הוספתי קצת מוזיקה לנאב בר  --> */}
+            <div className="col-3 d-flex justify-content-center align-items-center text-info">
+              <i className="fa fa-arrow-right px-1" aria-hidden="true"></i>
+              <Popup
+                content="Enjoy the music!"
+                trigger={
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "50px",
+                      height: "34px",
+                      overflow: "hidden",
+                    }}
+                    className="rounded"
+                  >
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "-263px",
+                        left: "-10px",
+                      }}
+                    >
+                      <iframe
+                        width="300"
+                        height="300"
+                        src="https://www.youtube.com/embed/5qap5aO4i9A?playlist=dTbONq0zxRA&rel=0"
+                      ></iframe>
+                    </div>
+                  </div>
+                }
+              />
+            </div>
           </div>
           <Link
             onClick={this.handleLogout}

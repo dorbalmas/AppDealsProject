@@ -105,14 +105,14 @@ class Profile extends Component {
   };
   handleProfileUpdate = async () => {
     if (
-      this.resturantName.current.value == "" ||
-      this.city.current.value == "" ||
-      this.street.current.value == "" ||
-      this.phoneNumber.current.value == "" ||
-      this.openHour.current.value == "" ||
-      this.closeHour.current.value == "" ||
-      this.kosherType.current.value == "" ||
-      this.description.current.value == ""
+      this.resturantName.current.value === "" ||
+      this.city.current.value === "" ||
+      this.street.current.value === "" ||
+      this.phoneNumber.current.value === "" ||
+      this.openHour.current.value === "" ||
+      this.closeHour.current.value === "" ||
+      this.kosherType.current.value === "" ||
+      this.description.current.value === ""
     ) {
       Swal.fire({
         icon: "error",

@@ -8,6 +8,22 @@ class LoggedAdminPannel extends Component {
     localStorage.clear();
     window.location.href = "/";
   };
+
+  myInput = React.createRef();
+
+  search = () => {
+    if (this.myInput.current.value)
+      if (this.props.history) {
+        this.props.history.push(
+          `/user/resturants/${this.myInput.current.value}`
+        );
+      }
+  };
+  keyPressed = (event) => {
+    if (event.key === "Enter") {
+      this.search();
+    }
+  };
   render() {
     return (
       <div className="row justify-content-center align-items-center fixed-top ">

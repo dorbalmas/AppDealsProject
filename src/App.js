@@ -21,6 +21,7 @@ import ListOfDeals from "./components/user/ListOfDeals";
 import EditDeal from "./components/user/EditDeal";
 import AppGuest from "./components/guestPage_components/AppGuest";
 import AdminTableSearch from "./components/user/AdminTableSearch";
+import OrderTableList from "./components/guestPage_components/OrderTableList";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -31,16 +32,36 @@ class App extends React.Component {
     };
   }
 
-  arrayCategories = ["Pasta", "Pizza", "Burger", "Sushi", "Salad", "Steak"];
+  arrayCategories = [
+    "Pasta",
+    "Pizza",
+    "Burgers",
+    "Sushi",
+    "Salads",
+    "Meat",
+    "Asain",
+    "American",
+    "Italian",
+    "Cafe",
+    "Seafood",
+    "Chinese",
+    "Mexican",
+    "indian",
+    "Gelato",
+    "Humus",
+    "Home-made",
+    "Patisserie",
+  ];
 
   arrayCities = [
     "Tel Aviv",
-    "Petah Tikva",
+    "Jaffo",
     "Herzelia",
     "Ramat Gan",
-    "Kfar Saba",
-    "Jaffo",
+    "Petah Tikva",
+    "Givataim",
   ];
+
   arrayHourDeals = [
     "08:00 - 10:00",
     "10:00 - 12:00",
@@ -121,163 +142,212 @@ class App extends React.Component {
     user.profile = { ...profile };
     this.setState({ userSession: { ...user } });
   };
-  //   dishUpdate = (dish) => {
-  //     const user = { ...this.state.userSession };
-  //     user.dish = { ...dish };
-  //     this.setState({ userSession: { ...user } });
-  //   };
 
   render() {
     return (
       <Router>
-        <div className="container">
-          <div className="d-flex justify-content-center align-items-center">
-            <div style={{ height: "75px" }}></div>
-            {/* {this.state.logged ? <LoggedResturantPanel /> : <NotLoggedPanel />} */}
-            {this.state.logged && this.state.type == "Resturant" ? (
-              <LoggedResturantPanel />
-            ) : this.state.logged && this.state.type == "Admin" ? (
-              <LoggedAdminPannel />
-            ) : this.state.logged && this.state.type == "Guest" ? (
-              <LoggedGuestPanel
-                cartSize={
-                  this.state.userSession
-                    ? this.state.userSession.cart.reduce(
-                        (result, i) => (result += Number(i.amount)),
-                        0
-                      )
-                    : 0
-                }
-              />
-            ) : (
-              <NotLoggedPanel />
-            )}
-          </div>
-          <div className="container-fluid"></div>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <AppGuest
-                  addToCart={this.addToCart}
-                  userId={
-                    this.state.userSession ? this.state.userSession._id : null
-                  }
-                  userLogged={this.state.userSession ? this.state.logged : null}
-                />
-              )}
-            />
-
-            <Route
-              exact
-              path="/user/cart"
-              render={() => (
-                <Cart
-                  userId={
-                    this.state.userSession ? this.state.userSession._id : null
-                  }
-                  user={
-                    this.state.userSession ? this.state.userSession.user : null
-                  }
+        <div className="container-fluid">
+          <div className="container">
+            <div className="d-flex justify-content-center align-items-center">
+              <div style={{ height: "75px" }}></div>
+              {/* {this.state.logged ? (
+                <LoggedResturantPanel />
+              ) : (
+                <NotLoggedPanel />
+              )} */}
+              {this.state.logged && this.state.type === "Resturant" ? (
+                <LoggedResturantPanel />
+              ) : this.state.logged && this.state.type === "Admin" ? (
+                <LoggedAdminPannel />
+              ) : this.state.logged && this.state.type === "Guest" ? (
+                <LoggedGuestPanel
                   cartSize={
                     this.state.userSession
                       ? this.state.userSession.cart.reduce(
-                          (res, i) =>
-                            (res +=
-                              Number(i.priceAfterDiscount) * Number(i.amount)),
+                          (result, i) => (result += Number(i.amount)),
                           0
                         )
                       : 0
                   }
-                  updateCart={this.updateCart}
-                  cart={
-                    this.state.userSession ? this.state.userSession.cart : []
-                  }
                 />
+              ) : (
+                <NotLoggedPanel />
               )}
-            />
-            <Route
-              exact
-              path="/user/login"
-              render={() => <Login login={this.userLogged} />}
-            />
-            <Route
-              exact
-              path="/user/signup"
-              render={(routeProps) => (
-                <Signup {...routeProps} signup={this.userLogged} />
-              )}
-            />
-            <Route
-              exact
-              path="/user/resturants"
-              render={(routeProps) => <AdminTableSearch {...routeProps} />}
-            />
-            <Route
-              path="/user/profile"
-              render={() => (
-                <Profile
-                  arrayCities={this.arrayCities}
-                  profileUpdate={this.profileUpdate}
-                  userId={
-                    this.state.userSession ? this.state.userSession._id : null
-                  }
-                  user={
-                    this.state.userSession
-                      ? this.state.userSession.profile
-                      : null
-                  }
-                />
-              )}
-            />
-            <Route
-              path="/user/dish"
-              render={() => (
-                <Dishes
-                  arrayHourDeals={this.arrayHourDeals}
-                  arrayCategories={this.arrayCategories}
-                  userId={
-                    this.state.userSession ? this.state.userSession._id : null
-                  }
-                  user={
-                    this.state.userSession ? this.state.userSession.user : null
-                  }
-                />
-              )}
-            />
-            <Route
-              path="/user/DealList"
-              render={() => (
-                <ListOfDeals
-                  userId={
-                    this.state.userSession ? this.state.userSession._id : null
-                  }
-                  user={
-                    this.state.userSession ? this.state.userSession.user : null
-                  }
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/user/singleDeal/:id"
-              render={(routeProps) => (
-                <EditDeal
-                  {...routeProps}
-                  arrayHourDeals={this.arrayHourDeals}
-                  arrayCategories={this.arrayCategories}
-                  userId={
-                    this.state.userSession ? this.state.userSession._id : null
-                  }
-                  user={
-                    this.state.userSession ? this.state.userSession.user : null
-                  }
-                />
-              )}
-            />
-            <Redirect to="/" />
-          </Switch>
+            </div>
+            <div className="container-fluid"></div>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <AppGuest
+                    arrayCities={this.arrayCities}
+                    arrayHourDeals={this.arrayHourDeals}
+                    arrayCategories={this.arrayCategories}
+                    addToCart={this.addToCart}
+                    userId={
+                      this.state.userSession ? this.state.userSession._id : null
+                    }
+                    userLogged={
+                      this.state.userSession ? this.state.logged : null
+                    }
+                    user={
+                      this.state.userSession ? this.state.userSession : null
+                    }
+                  />
+                )}
+              />
+
+              <Route
+                exact
+                path="/user/cart"
+                render={() => (
+                  <Cart
+                    userId={
+                      this.state.userSession ? this.state.userSession._id : null
+                    }
+                    user={
+                      this.state.userSession
+                        ? this.state.userSession.user
+                        : null
+                    }
+                    cartSize={
+                      this.state.userSession
+                        ? this.state.userSession.cart.reduce(
+                            (res, i) =>
+                              (res +=
+                                Number(i.priceAfterDiscount) *
+                                Number(i.amount)),
+                            0
+                          )
+                        : 0
+                    }
+                    updateCart={this.updateCart}
+                    cart={
+                      this.state.userSession ? this.state.userSession.cart : []
+                    }
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/user/OrderTableList"
+                render={() => (
+                  <OrderTableList
+                    userId={
+                      this.state.userSession ? this.state.userSession._id : null
+                    }
+                    user={
+                      this.state.userSession
+                        ? this.state.userSession.user
+                        : null
+                    }
+                    cartSize={
+                      this.state.userSession
+                        ? this.state.userSession.cart.reduce(
+                            (res, i) =>
+                              (res +=
+                                Number(i.priceAfterDiscount) *
+                                Number(i.amount)),
+                            0
+                          )
+                        : 0
+                    }
+                    updateCart={this.updateCart}
+                    cart={
+                      this.state.userSession ? this.state.userSession.cart : []
+                    }
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/user/login"
+                render={() => <Login login={this.userLogged} />}
+              />
+              <Route
+                exact
+                path="/user/signup"
+                render={(routeProps) => (
+                  <Signup {...routeProps} signup={this.userLogged} />
+                )}
+              />
+              <Route
+                exact
+                path="/user/resturants"
+                render={(routeProps) => <AdminTableSearch {...routeProps} />}
+              />
+              <Route
+                path="/user/profile"
+                render={() => (
+                  <Profile
+                    arrayCities={this.arrayCities}
+                    profileUpdate={this.profileUpdate}
+                    userId={
+                      this.state.userSession ? this.state.userSession._id : null
+                    }
+                    user={
+                      this.state.userSession
+                        ? this.state.userSession.profile
+                        : null
+                    }
+                  />
+                )}
+              />
+              <Route
+                path="/user/dish"
+                render={() => (
+                  <Dishes
+                    arrayHourDeals={this.arrayHourDeals}
+                    arrayCategories={this.arrayCategories}
+                    userId={
+                      this.state.userSession ? this.state.userSession._id : null
+                    }
+                    user={
+                      this.state.userSession
+                        ? this.state.userSession.user
+                        : null
+                    }
+                  />
+                )}
+              />
+              <Route
+                path="/user/DealList"
+                render={() => (
+                  <ListOfDeals
+                    userId={
+                      this.state.userSession ? this.state.userSession._id : null
+                    }
+                    user={
+                      this.state.userSession
+                        ? this.state.userSession.user
+                        : null
+                    }
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/user/singleDeal/:id"
+                render={(routeProps) => (
+                  <EditDeal
+                    {...routeProps}
+                    arrayHourDeals={this.arrayHourDeals}
+                    arrayCategories={this.arrayCategories}
+                    userId={
+                      this.state.userSession ? this.state.userSession._id : null
+                    }
+                    user={
+                      this.state.userSession
+                        ? this.state.userSession.user
+                        : null
+                    }
+                  />
+                )}
+              />
+              <Redirect to="/" />
+            </Switch>
+          </div>
         </div>
       </Router>
     );

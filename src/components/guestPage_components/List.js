@@ -21,6 +21,7 @@ function List(props) {
                     price={props.price}
                     addToCart={props.addToCart}
                     userLogged={props.userLogged}
+                    user={props.user}
                   />
                 );
               })

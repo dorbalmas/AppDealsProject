@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
-
+// import Swal from "sweetalert2";
+// import { Barcode } from "react-barcode";
 export function Td({ children, to }) {
   const ContentTag = to ? Link : "div";
   return (
@@ -17,32 +17,42 @@ export function Td({ children, to }) {
   );
 }
 
-const Item = (props) => {
+const OrderItem = (props) => {
   let item = props.item;
   console.log(item._id);
+
+  //   const [showHidePopUp, setShowHidePopUp] = useState(false);
+  //   const togglePopUp = (show, movieId, type = "") => {
+  //     if (!show) {
+  //       setMoveById(null);
+  //       return setShowHidePopUp(show);
+  //     }
+  //     setShowHidePopUp(show);
+  //     setMoveById(null);
+  //     switch (type) {
+  //       case "long":
+  //         return Api.apiGetSingleLong(movieId).then((data) => {
+  //           setMoveById(data);
+  //         });
+
+  //       default:
+  //         return Api.apiGetSingleShort(movieId).then((data) => {
+  //           setMoveById(data);
+  //         });
+  //     }
+  //   };
 
   return (
     <tbody>
       <tr className="changeMeTr text-center">
-        <Td to={`/user/singleDeal/${item._id}`}>{item.name}</Td>
-        <Td to={`/user/singleDeal/${item._id}`}>
-          {" "}
-          <i className="fas fa-dollar-sign"></i>
-          {item.priceBeforeDiscount}
+        <Td>{props.counter}</Td>
+        <Td>{item.orderDate}</Td>
+        <Td>
+          <p className="text-info">
+            <b>{item.code}</b>
+          </p>
         </Td>
-        <Td to={`/user/singleDeal/${item._id}`}>
-          {item.discount}
-          <b> %</b>
-        </Td>
-        <Td to={`/user/singleDeal/${item._id}`}>
-          {" "}
-          <i className="fas fa-dollar-sign"></i>
-          {item.priceAfterDiscount}
-        </Td>
-        <Td to={`/user/singleDeal/${item._id}`}>{item.category}</Td>
-        <Td to={`/user/singleDeal/${item._id}`}>{item.hoursOfDeal}</Td>
-        <Td to={`/user/singleDeal/${item._id}`}>{item.description}</Td>
-
+        {/* 
         <Td>
           <button
             onClick={() => {
@@ -71,10 +81,10 @@ const Item = (props) => {
           >
             X
           </button>
-        </Td>
+        </Td> */}
       </tr>
     </tbody>
   );
 };
 
-export default Item;
+export default OrderItem;

@@ -80,7 +80,7 @@ export const userAvatarUpdate = async (id, file) => {
   return data;
 };
 export const userResturantDishAvatar = async (user_id, dish_id, file) => {
-  const urlFile = ` https://dealsproject.herokuapp.com/user/userResturantDishAvatar/${user_id}/${dish_id}`;
+  const urlFile = ` http://localhost:3033/user/userResturantDishAvatar/${user_id}/${dish_id}`;
   let resp = await fetch(urlFile, {
     method: "POST",
     body: file,

@@ -64,9 +64,9 @@ class Signup extends Component {
           });
           this.setState({ logged: true });
           this.props.signup(data.body, data.token);
+
           if (this.props.history) {
             this.props.history.push("/");
-          } else {
             window.location.href = "/";
           }
         } else {

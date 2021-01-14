@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 // import { doApiGet } from "../../services/apiService";
 
 import DealItem from "./DealItem";
@@ -10,13 +10,13 @@ function ItemComp(props) {
   let price = props.price;
   let filtered = item.dishDeals.filter((item) => item);
 
-  if (categoryValue != "")
+  if (categoryValue !== "")
     filtered = item.dishDeals.filter((item) => item.category === categoryValue);
 
-  if (hourDealValue != "")
+  if (hourDealValue !== "")
     filtered = filtered.filter((item) => item.hoursOfDeal === hourDealValue);
 
-  if (price != "")
+  if (price !== "")
     filtered = filtered.filter((item) => item.priceAfterDiscount <= price);
 
   //   let [arr, setArr] = useState([]);
@@ -68,9 +68,12 @@ function ItemComp(props) {
         <p className="px-1">
           {item.profile.openHour} - {item.profile.closeHour}
         </p>
-        <textarea className="form-control w-100" type="text" rows="4">
-          {item.profile.description}
-        </textarea>
+        <textarea
+          className="form-control w-100"
+          type="text"
+          rows="4"
+          value={item.profile.description}
+        ></textarea>
       </div>
       <div className="container row align-items-center justify-content-center">
         {filtered.map((item) => {
@@ -80,6 +83,7 @@ function ItemComp(props) {
               key={item._id}
               addToCart={props.addToCart}
               userLogged={props.userLogged}
+              user={props.user}
             />
           );
         })}

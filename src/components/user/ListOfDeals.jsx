@@ -33,7 +33,7 @@ const ListOfDeals = (props) => {
       ` https://dealsproject.herokuapp.com/user/removeDish/${props.userId}/${_DealId._id}`,
       _DealId
     ).then((data) => {
-      if (data.message == "deleted")
+      if (data.message === "deleted")
         apiGet(
           ` https://dealsproject.herokuapp.com/user/allDishesPerUser/${props.userId}`
         ).then((data) => {

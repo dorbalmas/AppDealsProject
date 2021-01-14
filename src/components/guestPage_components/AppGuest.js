@@ -11,27 +11,9 @@ const AppGuest = (props) => {
   let priceRefInput = useRef("");
   let [price, setPrice] = useState("");
   console.log(priceRefInput.current.value);
-  let arrayKosher = ["Kosher", "Show all", "Not kosher"];
-  let arrayCategories = ["Pasta", "Pizza", "Burger", "Sushi", "Salad", "Steak"];
-  let arrayCities = [
-    "Tel Aviv",
-    "Petah Tikva",
-    "Herzelia",
-    "Ramat Gan",
-    "Kfar Saba",
-    "Jaffo",
-  ];
-  let arrayHourDeals = [
-    "08:00 - 10:00",
-    "10:00 - 12:00",
-    "12:00 - 14:00",
-    "14:00 - 16:00",
-    "16:00 - 18:00",
-    "18:00 - 20:00",
-    "20:00 - 22:00",
-    "22:00 - 00:00",
-  ];
-
+  let arrayCategories = props.arrayCategories;
+  let arrayCities = props.arrayCities;
+  let arrayHourDeals = props.arrayHourDeals;
   const handleKosherChange = (event) => setKosherValue(event);
   const handleCategoryChange = (event) => setCategotyValue(event);
   const handleCityChange = (event) => setCityValue(event);
@@ -95,10 +77,10 @@ const AppGuest = (props) => {
   }, [profileUrl]);
 
   return (
-    <div className="container-fluid row " style={{ opacity: 0.93 }}>
+    <div className=" row " style={{ opacity: 0.93 }}>
       <form
         onSubmit={handleSubmit}
-        className="col-lg-3 card p-0 m-0 "
+        className="col-lg-4 card p-0 m-0 "
         style={{ minHeight: "632px" }}
       >
         {/* **********************Title****************** */}
@@ -117,7 +99,6 @@ const AppGuest = (props) => {
         </button>
         <button className="btn btn-toolbar" autoFocus>
           <ToggleButtonGroup
-            autoFocus
             value={KosherValue}
             onChange={handleKosherChange}
             type="radio"
@@ -244,11 +225,10 @@ const AppGuest = (props) => {
           </ToggleButtonGroup>
         </button>
         <hr />
-
+        {/* ---------------------------------price--------------------------------------- */}
         <button className="btn btn-toolbar ">
           <label htmlFor="customRange1">
-            Up to: {price}
-            <i className="fas fa-shekel-sign m-1 text-info"></i>
+            Up to: <i className="fas fa-dollar-sign"></i> {price}
           </label>
           <input
             onChange={() => {
@@ -263,7 +243,7 @@ const AppGuest = (props) => {
           />
         </button>
       </form>
-      <div className="col-lg-9 card p-0 m-0 ">
+      <div className="col-lg-8 card p-0 m-0 ">
         {loading ? (
           <div className="d-flex justify-content-center align-items-center">
             <div style={{ minheight: "400px" }}></div>
@@ -285,6 +265,7 @@ const AppGuest = (props) => {
             price={price}
             addToCart={props.addToCart}
             userLogged={props.userLogged}
+            user={props.user}
           />
         )}
       </div>
